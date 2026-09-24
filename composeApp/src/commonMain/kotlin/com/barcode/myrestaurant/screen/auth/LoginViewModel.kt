@@ -1,4 +1,4 @@
-package com.barcode.myrestaurant.presentation.auth
+package com.barcode.myrestaurant.screen.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -37,5 +37,9 @@ class LoginViewModel(
 
     fun clearError() {
         _uiState.update { it.copy(errorMessage = null) }
+    }
+
+    fun clearSuccess() {
+        _uiState.update { it.copy(isSuccess = false) }
     }
 }

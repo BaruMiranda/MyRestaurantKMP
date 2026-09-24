@@ -1,4 +1,4 @@
-package com.barcode.myrestaurant.presentation.auth
+package com.barcode.myrestaurant.screen.auth
 
 import com.barcode.myrestaurant.domain.model.User
 

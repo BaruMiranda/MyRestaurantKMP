@@ -48,7 +48,6 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.barcode.myrestaurant.di.AppContainer
-import com.barcode.myrestaurant.presentation.auth.LoginViewModel
 import com.barcode.myrestaurant.screen.MainScreen
 import com.barcode.myrestaurant.ui.components.RestFilledButton
 import com.barcode.myrestaurant.ui.components.RestPasswordField
@@ -83,7 +82,10 @@ class LoginScreen : Screen {
         val snackbarHostState = remember { SnackbarHostState() }
 
         LaunchedEffect(uiState.isSuccess) {
-            if (uiState.isSuccess) navigator.push(MainScreen())
+            if (uiState.isSuccess) {
+                viewModel.clearSuccess()
+                navigator.replaceAll(MainScreen())
+            }
         }
         LaunchedEffect(uiState.errorMessage) {
             uiState.errorMessage?.let {
