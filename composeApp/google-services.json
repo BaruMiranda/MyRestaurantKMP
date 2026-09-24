@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "352530355957",
+    "project_id": "restaurant-fc8ad",
+    "storage_bucket": "restaurant-fc8ad.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352530355957:android:a4c5f61ab993ae6e7857bc",
+        "android_client_info": {
+          "package_name": "com.barcode.myrestaurant"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnfj_OTK_IiBwSunvzkgK_ASE7ifFy_wk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,6 +6,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.isSuccess
@@ -20,7 +21,8 @@ class AuthApi(private val client: HttpClient) {
             setBody(request)
         }
         if (!response.status.isSuccess()) {
-            throw Exception("Error ${response.status.value}: ${response.status.description}")
+            val errorBody = response.bodyAsText()
+            throw Exception("Error ${response.status.value}: $errorBody")
         }
         return response.body()
     }

@@ -3,12 +3,12 @@ package com.barcode.myrestaurant.data.repository
 import com.barcode.myrestaurant.data.remote.api.AuthApi
 import com.barcode.myrestaurant.data.remote.dto.LoginRequestDto
 import com.barcode.myrestaurant.data.remote.dto.toDomain
+import com.barcode.myrestaurant.data.remote.getFcmToken
 import com.barcode.myrestaurant.domain.model.User
 import com.barcode.myrestaurant.domain.repository.AuthRepository
 
 private const val DEVICE_NAME = "MyRestaurant App"
 private const val DEVICE_TYPE = "ANDROID"
-private const val FCM_TOKEN   = ""
 
 class AuthRepositoryImpl(private val api: AuthApi) : AuthRepository {
 
@@ -20,7 +20,7 @@ class AuthRepositoryImpl(private val api: AuthApi) : AuthRepository {
                     password   = password,
                     deviceName = DEVICE_NAME,
                     deviceType = DEVICE_TYPE,
-                    fcmToken   = FCM_TOKEN,
+                    fcmToken   = getFcmToken(),
                 )
             )
             if (response.success) {

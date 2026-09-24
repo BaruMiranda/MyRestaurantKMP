@@ -1,15 +1,15 @@
 package com.barcode.myrestaurant.screen
 
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.CurrentTab
@@ -17,43 +17,33 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabDisposable
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import com.barcode.myrestaurant.screen.bottom_bar.FavTab
-import com.barcode.myrestaurant.screen.bottom_bar.HomeTab
-import com.barcode.myrestaurant.screen.bottom_bar.MenuTab
-import com.barcode.myrestaurant.screen.bottom_bar.ProfileTab
+import com.barcode.myrestaurant.screen.cart.CartTab
+import com.barcode.myrestaurant.screen.home.HomeTab
+import com.barcode.myrestaurant.screen.profile.ProfileTab
 import com.barcode.myrestaurant.ui.theme.RestaurantColors
 
 class MainScreen : Screen {
 
-    @OptIn(ExperimentalVoyagerApi::class, ExperimentalMaterial3Api::class)
+    @OptIn(ExperimentalVoyagerApi::class)
     @Composable
     override fun Content() {
-        val tabs = listOf(HomeTab, FavTab, MenuTab, ProfileTab)
+        val tabs = listOf(HomeTab, CartTab, ProfileTab)
 
         TabNavigator(
             HomeTab,
             tabDisposable = { TabDisposable(it, tabs) },
         ) {
-            val tabNavigator = LocalTabNavigator.current
-
             Scaffold(
-                topBar = {
-                    TopAppBar(
-                        title = { Text(tabNavigator.current.options.title) },
-                        colors = TopAppBarDefaults.topAppBarColors(
-                            containerColor = RestaurantColors.Surface,
-                            titleContentColor = RestaurantColors.OnSurface,
-                        ),
-                    )
-                },
                 bottomBar = {
                     NavigationBar(containerColor = RestaurantColors.Surface) {
-                        tabs.forEach { tab ->
-                            TabNavigationItem(tab)
-                        }
+                        tabs.forEach { tab -> TabNavigationItem(tab) }
                     }
                 },
-                content = { CurrentTab() },
+                content = { innerPadding ->
+                    Box(Modifier.padding(bottom = innerPadding.calculateBottomPadding())) {
+                        CurrentTab()
+                    }
+                },
             )
         }
     }
